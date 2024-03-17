@@ -1,6 +1,6 @@
 -- Data sourced from Kaggle, URL: https://www.kaggle.com/datasets/lylebegbie/international-rugby-union-results-from-18712022
 
--- Project idea was from and done with, GitHub URL: https://github.com/jeonpierre
+-- Project idea was from and done with, GitHub URL: https://github.com/jeanpierre
 
 -- Looking at the data to decide what to clean and query later.
 
