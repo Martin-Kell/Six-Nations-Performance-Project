@@ -244,6 +244,69 @@ LEFT OUTER JOIN #temp_WinsAtHome WAH
 	ON GAH.Stadium = WAH.Stadium
 	ORDER BY Percentage DESC
 
+-- 7. Working out the Scores in England Games
+
+	-- 7.1 
+
+SELECT Date,
+CASE 
+	WHEN Home_team = 'England' THEN Home_team
+	WHEN Away_team = 'England' THEN Away_team
+END as England,
+CASE 
+	WHEN Home_team <> 'England' THEN Home_team
+	WHEN Away_team <> 'England' THEN Away_team
+END as Opposition,
+CASE 
+	WHEN Home_team = 'England' THEN Home_score
+	WHEN Away_team = 'England' THEN Away_score
+END as Englands_Score,
+CASE 
+	WHEN Home_team <> 'England' THEN Home_score
+	WHEN Away_team <> 'England' THEN Away_score
+END as Oppositions_Score,
+(Home_score + Away_score) as Combined_score
+FROM SixNationsData
+WHERE Home_team = 'England' OR Away_team = 'England'
+ORDER BY Opposition, Date
+
+	-- 7.2 Englands percentage Win rate against each team.
+
+		-- England vs Ireland
+
+SELECT winner, COUNT(winner) as Wins
+FROM SixNationsData
+WHERE (Home_team = 'England' AND Away_team = 'Ireland') OR (Away_team = 'England' AND Home_team = 'Ireland')
+GROUP BY winner
+
+		-- England vs France
+
+SELECT winner, COUNT(winner) as Wins
+FROM SixNationsData
+WHERE (Home_team = 'England' AND Away_team = 'France') OR (Away_team = 'England' AND Home_team = 'France')
+GROUP BY winner
+
+		-- England vs Wales
+
+SELECT winner, COUNT(winner) as Wins
+FROM SixNationsData
+WHERE (Home_team = 'England' AND Away_team = 'Wales') OR (Away_team = 'England' AND Home_team = 'Wales')
+GROUP BY winner
+
+		-- England vs Scotland
+
+SELECT winner, COUNT(winner) as Wins
+FROM SixNationsData
+WHERE (Home_team = 'England' AND Away_team = 'Scotland') OR (Away_team = 'England' AND Home_team = 'Scotland')
+GROUP BY winner
+
+		-- England vs Italy
+
+SELECT winner, COUNT(winner) as Wins
+FROM SixNationsData
+WHERE (Home_team = 'England' AND Away_team = 'Italy') OR (Away_team = 'England' AND Home_team = 'Italy')
+GROUP BY winner 
+	
 -- Testing and Extra Queries.
 
 SELECT Winner, COUNT(Winner) as Count, 
